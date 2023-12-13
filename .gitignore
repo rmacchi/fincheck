@@ -1,11 +1,8 @@
 # compiled output
 /dist
 /node_modules
-<<<<<<< HEAD
-.env
-=======
 /.env
->>>>>>> e6aba11 (feat: Include authenticate JWT for users)
+
 
 # Logs
 logs
