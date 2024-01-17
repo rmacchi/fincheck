@@ -1,29 +1,27 @@
-import { Routes, Route, BrowserRouter, Outlet } from "react-router-dom"
+import { Routes, Route, BrowserRouter } from "react-router-dom"
+import { AuthGuard } from "./AuthGuard";
 
-function Layout() {
-  return (
-    <div>
-      <div className="w-full bg-red-500 h-10"></div>
-
-      <div className="flex">
-        <nav className="w-[300px] bg-red-400 h-80"></nav>
-        <Outlet />
-      </div>
-    </div>
-  );
-}
+import { Login } from "../ui/pages/Login";
+import { Register } from "../ui/pages/Register";
+import { Dashboard } from "../ui/pages/Dashboard";
+import { AuthLayout } from "../ui/layouts/AuthLayout";
 
 export function Router() {
+
   return (
     <BrowserRouter>
       <Routes>
 
-        <Route element={<Layout />}>
-          <Route path="/login" element={<h1>Login</h1>} />
-          <Route path="/register" element={<h1>Register</h1>} />
+        <Route element={<AuthGuard isPrivate={false} />}>
+          <Route element={<AuthLayout />}>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Route>
         </Route>
 
-        <Route path="/" element={<h1>Dashboard</h1>} />
+        <Route element={<AuthGuard isPrivate />}>
+          <Route path="/" element={<Dashboard />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   )
